@@ -12,3 +12,39 @@
 Формат вывода
 Выведите одно число – сумму денег, которую Вася должен взять с собой в супермаркет (минимально возможную).
  */
+#include <iostream>
+
+void InsertionSort(int *arr, const int size, bool reverse = false) {
+  for (int i = 1; i < size; i++) {
+    int x = arr[i];
+    int j = i - 1;
+    while (j >= 0 && (reverse ? arr[j] < x : arr[j] > x)) {
+      arr[j + 1] = arr[j];
+      j--;
+    }
+    arr[j + 1] = x;
+  }
+}
+
+int main() {
+  std::ios::sync_with_stdio(false);
+  std::cin.tie(nullptr);
+
+  int n;
+  std::cin >> n;
+  int *cart = new int[n];
+  for (int i = 0; i < n; i++) {
+    std::cin >> cart[i];
+  }
+  InsertionSort(cart, n, true);
+  int res = 0;
+  for (int i = 0; i < n; i++) {
+    if ((i + 1) % 3 == 0) {
+      continue;
+    }
+    res += cart[i];
+  }
+  std::cout << res;
+  delete[] cart;
+  return 0;
+}
