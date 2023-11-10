@@ -17,3 +17,19 @@
 Примечания
 В программе запрещается объявлять массивы и использовать циклы (даже для ввода и вывода).
  */
+#include <iostream>
+
+void Func(int n) {
+  if (n > 0) {
+    int num;
+    std::cin >> num;
+    Func(--n);
+    std::cout << num << ' ';
+  }
+}
+
+int main() {
+  int n;
+  std::cin >> n;
+  Func(n);
+}

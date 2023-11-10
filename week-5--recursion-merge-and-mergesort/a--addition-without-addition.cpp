@@ -12,3 +12,17 @@
 Формат вывода
 Выведите ответ на задачу.
  */
+#include <iostream>
+
+int Sum(int a, int b) {
+  if (b > 0) {
+    return Sum(++a, --b);
+  }
+  return a;
+}
+
+int main() {
+  int a, b;
+  std::cin >> a >> b;
+  std::cout << Sum(a, b);
+}

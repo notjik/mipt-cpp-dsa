@@ -10,5 +10,27 @@
 Вводится 2 числа - a (вещественное) и n (0 ≤ n ≤ 109).
 
 Формат вывода
-Необходимо вывести значение an.
+Необходимо вывести значение a^n.
  */
+#include <iostream>
+
+long double Pow(double a, int n) {
+  if (n == 0) {
+    return 1;
+  }
+  if (n < 0) {
+    return 1 / Pow(a, -n);
+  }
+  if (n % 2 == 0) {
+    long double half = Pow(a, n / 2);
+    return half * half;
+  }
+  return a * Pow(a, n - 1);
+}
+
+int main() {
+  long double a;
+  int n;
+  std::cin >> a >> n;
+  std::cout << Pow(a, n);
+}

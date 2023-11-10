@@ -13,6 +13,18 @@
 
 Формат вывода
 Выведите одно число — количество запусков функции.
-
-Пример
  */
+#include <iostream>
+
+int Fibonacci(int n) {
+  if (n <= 2) {
+    return 1;
+  }
+  return Fibonacci(n - 1) + Fibonacci(n - 2) + 1;
+}
+
+int main() {
+  int n;
+  std::cin >> n;
+  std::cout << Fibonacci(n);
+}

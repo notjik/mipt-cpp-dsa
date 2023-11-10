@@ -36,3 +36,80 @@ n — количество игроков (2≤n≤100).
 Примечания
 Во втором примере Петя не может выиграть в последнем туре. Однако, назвав число 2, Петя не позволяет выиграть первому игроку, и, тем самым, остается вторым по итогам всей игры. У четырех игроков баллы меньше, чем у Пети.
  */
+#include <iostream>
+
+int Check(int x, int *&scores, int *&called, int *c_global, const int &n) {
+  int *c = new int[102];
+  for (int i = 0; i < 102; i++) {
+    c[i] = c_global[i];
+  }
+  int *last = new int[n];
+  c[x] += 1;
+  called[n - 1] = x;
+  for (int i = 0; i < n; i++) {
+    last[i] = scores[i];
+  }
+  bool flag = true;
+  for (int i = 0; i < 102; i++) {
+    if (flag) {
+      if (c[i] == 1) {
+        for (int j = 0; j < n; j++) {
+          if (called[j] == i) {
+            last[j] += called[j];
+            flag = false;
+            break;
+          }
+        }
+      }
+    } else {
+      break;
+    }
+  }
+  int h = last[n - 1];
+  int top = 1, count_top = 0;
+  for (int i = 0; i < n - 1; i++) {
+    if (last[i] > h) {
+      top++;
+    } else if (last[i] == h) {
+      count_top++;
+    }
+  }
+  delete[] c;
+  delete[] last;
+  return top + count_top;
+}
+
+int main() {
+  int n;
+  std::cin >> n;
+  int *scores = new int[n];
+  int *called = new int[n];
+  called[n - 1] = 0;
+  for (int i = 0; i < n; i++) {
+    std::cin >> scores[i];
+  }
+
+  int c_global[102];
+  for (int i = 0; i < 102; i++) {
+    c_global[i] = 0;
+  }
+
+  for (int i = 0; i < n - 1; i++) {
+    int a;
+    std::cin >> a;
+    called[i] = a;
+    c_global[a] += 1;
+  }
+  int top = n + 1, res = -1;
+  for (int i = 1; i < 102; i++) {
+    int check = Check(i, scores, called, c_global, n);
+    if (check < top) {
+      top = check;
+      res = i;
+    }
+  }
+  std::cout << res << '\n';
+  delete[] scores;
+  delete[] called;
+  return 0;
+}
