@@ -45,9 +45,10 @@
 30
 ```
 */
+#include <cstdint>
 #include <iostream>
 
-int Partition(int* arr, int left, int right, bool& reverse) {
+int Partition(int* arr, int left, int right, const bool& reverse) {
   int mid = (left + right) / 2;
   int pivot = arr[mid];
   while (left < right) {
@@ -67,7 +68,7 @@ int Partition(int* arr, int left, int right, bool& reverse) {
   return right;
 }
 
-void QuickSortBackend(int* arr, int left, int right, bool& reverse) {
+void QuickSortBackend(int* arr, int left, int right, const bool& reverse) {
   if (left < right) {
     int pivot = Partition(arr, left, right, reverse);
     QuickSortBackend(arr, left, pivot, reverse);
@@ -92,8 +93,26 @@ int main() {
   for (int i = 0; i < n - k + 1; i++) {
     delta[i] = arr[i] - arr[i + k - 1];
   }
-  QuickSort(delta, n - k + 1);
-  std::cout << delta[n % m == 0 ? m - 1 : m - 2];
+  int left = -1;
+  int right = arr[0] - arr[n - 1];
+  while (left != right - 1) {
+    int mid = (left + right) / 2;
+    int groups = 0;
+    int remains = 0;
+    for (int i = 0; i < n - k + 1; i++) {
+      remains--;
+      if (remains < 1 && delta[i] <= mid) {
+        groups++;
+        remains = k;
+      }
+    }
+    if (groups >= m) {
+      right = mid;
+    } else {
+      left = mid;
+    }
+  }
+  std::cout << right;
   delete[] arr;
   delete[] delta;
   return 0;
