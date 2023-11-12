@@ -73,13 +73,14 @@ set(CMAKE_CXX_STANDARD 17)
 
 # [week-6]
 #add_executable(susu_mipt_cpp week-6--quicksort/a--quick-sort-and-quote-from-dead-souls.cpp)
-#add_executable(susu_mipt_cpp week-6--quicksort/b--applicants.cpp)
+add_executable(susu_mipt_cpp week-6--quicksort/b--applicants.cpp)
 #add_executable(susu_mipt_cpp week-6--quicksort/c--top-three.cpp)
 #add_executable(susu_mipt_cpp week-6--quicksort/d--chimneysweep.cpp)
 
 # [week-7]
-#add_executable(susu_mipt_cpp week-7--heap-and-heapsort/a--heap.cpp)
-add_executable(susu_mipt_cpp week-7--heap-and-heapsort/d--counting-sort.cpp)
+#add_executable(susu_mipt_cpp week-7--heapsort-and-countingsort/a--heap.cpp)
+#add_executable(susu_mipt_cpp week-7--heapsort-and-countingsort/c--priority-queue.cpp)
+#add_executable(susu_mipt_cpp week-7--heapsort-and-countingsort/d--counting-sort.cpp)
 
 # [week-8]
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/a--nth-number-fibonacci.cpp)

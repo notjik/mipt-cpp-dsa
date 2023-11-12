@@ -48,9 +48,9 @@
 #include <cstdint>
 #include <iostream>
 
-int Partition(int* arr, int left, int right, const bool& reverse) {
-  int mid = (left + right) / 2;
-  int pivot = arr[mid];
+int64_t Partition(int64_t* arr, int64_t left, int64_t right, const bool& reverse) {
+  int64_t mid = (left + right) / 2;
+  int64_t pivot = arr[mid];
   while (left < right) {
     while (reverse ? arr[left] > pivot : arr[left] < pivot) {
       left++;
@@ -68,52 +68,54 @@ int Partition(int* arr, int left, int right, const bool& reverse) {
   return right;
 }
 
-void QuickSortBackend(int* arr, int left, int right, const bool& reverse) {
+void QuickSortBackend(int64_t* arr, int64_t left, int64_t right, const bool& reverse) {
   if (left < right) {
-    int pivot = Partition(arr, left, right, reverse);
+    int64_t pivot = Partition(arr, left, right, reverse);
     QuickSortBackend(arr, left, pivot, reverse);
     QuickSortBackend(arr, pivot + 1, right, reverse);
   }
 }
 
-void QuickSort(int* arr, int size, bool reverse = false) {
+void QuickSort(int64_t* arr, int64_t size, bool reverse = false) {
   QuickSortBackend(arr, 0, size - 1, reverse);
 }
 
+int64_t Groups(const int64_t* arr, int64_t size, int64_t left, int64_t right, int64_t k) {
+  int64_t mid = (left + right) / 2;
+  int64_t groups = 0;
+  for (int64_t i = 0; i < size - k + 1; i++) {
+    if (arr[i + k - 1] - arr[i] <= mid) {
+      groups++;
+      i += k - 1;
+    }
+  }
+  return groups;
+}
+
 int main() {
-  int n, m, k;
+  int64_t n, m, k;
   std::cin >> n >> m >> k;
-  auto* arr = new int[n];
-  for (int i = 0; i < n; i++) {
+  auto* arr = new int64_t[n];
+  for (int64_t i = 0; i < n; i++) {
     std::cin >> arr[i];
   }
-  QuickSort(arr, n, true);
-  auto* delta = new int[n - k + 1];
-  delta[0] = 0;
-  for (int i = 0; i < n - k + 1; i++) {
-    delta[i] = arr[i] - arr[i + k - 1];
-  }
-  int left = -1;
-  int right = arr[0] - arr[n - 1];
-  while (left != right - 1) {
-    int mid = (left + right) / 2;
-    int groups = 0;
-    int remains = 0;
-    for (int i = 0; i < n - k + 1; i++) {
-      remains--;
-      if (remains < 1 && delta[i] <= mid) {
-        groups++;
-        remains = k;
-      }
-    }
+  QuickSort(arr, n);
+  int64_t left = 0;
+  int64_t right = arr[n - 1] - arr[0];
+  while (left < right - 1) {
+    int64_t groups = Groups(arr, n, left, right, k);
     if (groups >= m) {
-      right = mid;
+      right = (left + right) / 2;
     } else {
-      left = mid;
+      left = (left + right) / 2;
     }
   }
-  std::cout << right;
+  int64_t groups = Groups(arr, n, left, right, k);
+  if (groups == m) {
+    std::cout << left;
+  } else {
+    std::cout << right;
+  }
   delete[] arr;
-  delete[] delta;
   return 0;
 }
