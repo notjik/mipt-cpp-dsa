@@ -48,40 +48,39 @@
 #include <cstdint>
 #include <iostream>
 
-int64_t Partition(int64_t* arr, int64_t left, int64_t right, const bool& reverse) {
-  int64_t mid = (left + right) / 2;
-  int64_t pivot = arr[mid];
-  while (left < right) {
-    while (reverse ? arr[left] > pivot : arr[left] < pivot) {
-      left++;
+int64_t Partition(int64_t* arr, int64_t left, int64_t right) {
+  int64_t pivot = arr[left];
+  int64_t i = left + 1;
+  int64_t j = right;
+  while (true) {
+    while (i <= j && arr[i] <= pivot) {
+      i++;
     }
-    while (reverse ? arr[right] < pivot : arr[right] > pivot) {
-      right--;
+    while (arr[j] >= pivot && j >= i) {
+      j--;
     }
-    if (left >= right) {
+    if (j < i) {
       break;
     }
-    std::swap(arr[left], arr[right]);
-    left++;
-    right--;
+    std::swap(arr[i], arr[j]);
   }
-  return right;
+  std::swap(arr[left], arr[j]);
+  return j;
 }
 
-void QuickSortBackend(int64_t* arr, int64_t left, int64_t right, const bool& reverse) {
+void QuickSortBackend(int64_t* arr, int64_t left, int64_t right) {
   if (left < right) {
-    int64_t pivot = Partition(arr, left, right, reverse);
-    QuickSortBackend(arr, left, pivot, reverse);
-    QuickSortBackend(arr, pivot + 1, right, reverse);
+    int64_t pivot_index = Partition(arr, left, right);
+    QuickSortBackend(arr, left, pivot_index - 1);
+    QuickSortBackend(arr, pivot_index + 1, right);
   }
 }
 
-void QuickSort(int64_t* arr, int64_t size, bool reverse = false) {
-  QuickSortBackend(arr, 0, size - 1, reverse);
+void QuickSort(int64_t* arr, int64_t size) {
+  QuickSortBackend(arr, 0, size - 1);
 }
 
-int64_t Groups(const int64_t* arr, int64_t size, int64_t left, int64_t right, int64_t k) {
-  int64_t mid = (left + right) / 2;
+int64_t Groups(const int64_t* arr, int64_t size, int64_t mid, int64_t k) {
   int64_t groups = 0;
   for (int64_t i = 0; i < size - k + 1; i++) {
     if (arr[i + k - 1] - arr[i] <= mid) {
@@ -103,15 +102,15 @@ int main() {
   int64_t left = 0;
   int64_t right = arr[n - 1] - arr[0];
   while (left < right - 1) {
-    int64_t groups = Groups(arr, n, left, right, k);
+    int64_t mid = left + (right - left) / 2;
+    int64_t groups = Groups(arr, n, mid, k);
     if (groups >= m) {
-      right = (left + right) / 2;
+      right = mid;
     } else {
-      left = (left + right) / 2;
+      left = mid + 1;
     }
   }
-  int64_t groups = Groups(arr, n, left, right, k);
-  if (groups == m) {
+  if (Groups(arr, n, left, k) >= m) {
     std::cout << left;
   } else {
     std::cout << right;
