@@ -36,52 +36,49 @@
  */
 #include <iostream>
 
-int Max(const int* arr, int size) {
+int Max(const int* arr, int left, int right) {
   int max = -1;
-  for (int i = 0; i < size; i++) {
+  for (int i = left; i <= right; i++) {
     max = (max < arr[i] ? arr[i] : max);
   }
   return max;
 }
 
-int Min(const int* arr, int size) {
+int Min(const int* arr, int left, int right) {
   int min = 1000000;
-  for (int i = 0; i < size; i++) {
+  for (int i = left; i <= right; i++) {
     min = (min > arr[i] ? arr[i] : min);
   }
   return min;
 }
 
-int Partition(int* arr, int left, int right, bool& reverse) {
-  int mid = (left + right) / 2;
-  int pivot = arr[mid];
-  while (left < right) {
-    while (reverse ? arr[left] > pivot : arr[left] < pivot) {
-      left++;
+int Partition(int* arr, int left, int right, const bool& reverse = false) {
+  int pivot = arr[left];
+  int i = left + 1;
+  int j = right;
+  while (true) {
+    while (i <= j && (reverse ? arr[i] >= pivot : arr[i] <= pivot)) {
+      i++;
     }
-    while (reverse ? arr[right] < pivot : arr[right] > pivot) {
-      right--;
+    while (j >= i && (reverse ? arr[i] <= pivot : arr[j] >= pivot)) {
+      j--;
     }
-    if (left >= right) {
+    if (j < i) {
       break;
     }
-    std::swap(arr[left], arr[right]);
-    left++;
-    right--;
+    std::swap(arr[i], arr[j]);
   }
-  return right;
+  std::swap(arr[left], arr[j]);
+  return j;
 }
 
-void QuickSortBackend(int* arr, int left, int right, bool& reverse) {
+void QuickSortBackend(int* arr, int left, int right,
+                      const bool& reverse = false) {
   if (left < right) {
-    int pivot = Partition(arr, left, right, reverse);
-    QuickSortBackend(arr, left, pivot, reverse);
-    QuickSortBackend(arr, pivot + 1, right, reverse);
+    int pivot_index = Partition(arr, left, right, reverse);
+    QuickSortBackend(arr, left, pivot_index - 1, reverse);
+    QuickSortBackend(arr, pivot_index + 1, right, reverse);
   }
-}
-
-void QuickSort(int* arr, int size, bool reverse = false) {
-  QuickSortBackend(arr, 0, size - 1, reverse);
 }
 
 int main() {
@@ -92,23 +89,15 @@ int main() {
     std::cin >> arr[i];
   }
   std::cin >> k;
-  bool reverse = n - k < k;
-  int idx_state = k - 1;
-  int state = arr[idx_state];
-  QuickSort(arr, n, reverse);
-  for (int i = 0; i < n; i++) {
-    if (arr[i] == state) {
-      idx_state = i;
-    }
+  if (k - 2 >= 0) {
+    bool reverse1 = abs(Max(arr, 0, k - 2) - arr[k - 1]) >
+                    abs(Min(arr, 0, k - 2) - arr[k - 1]);
+    QuickSortBackend(arr, 0, k - 2, reverse1);
   }
-  while (idx_state != k - 1) {
-    if (idx_state < k - 1) {
-      std::swap(arr[idx_state], arr[idx_state + 1]);
-      idx_state++;
-    } else {
-      std::swap(arr[idx_state], arr[idx_state - 1]);
-      idx_state--;
-    }
+  if (k <= n - 1) {
+    bool reverse2 = abs(Max(arr, k, n - 1) - arr[k - 1]) <
+                    abs(Min(arr, k - 2, n - 1) - arr[k - 1]);
+    QuickSortBackend(arr, k, n - 1, reverse2);
   }
   for (int i = 0; i < n; i++) {
     std::cout << arr[i] << ' ';

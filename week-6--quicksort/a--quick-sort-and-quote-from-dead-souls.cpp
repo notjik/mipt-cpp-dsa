@@ -34,7 +34,7 @@
  */
 #include <iostream>
 
-int partition(int* arr, int left, int right) {
+int Partition(int* arr, int left, int right) {
   int pivot = arr[left];
   int i = left + 1;
   int j = right;
@@ -56,7 +56,7 @@ int partition(int* arr, int left, int right) {
 
 void QuickSortBackend(int* arr, int left, int right) {
   if (left < right) {
-    int pivot_index = partition(arr, left, right);
+    int pivot_index = Partition(arr, left, right);
     QuickSortBackend(arr, left, pivot_index - 1);
     QuickSortBackend(arr, pivot_index + 1, right);
   }

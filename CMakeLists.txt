@@ -73,9 +73,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 # [week-6]
 #add_executable(susu_mipt_cpp week-6--quicksort/a--quick-sort-and-quote-from-dead-souls.cpp)
-add_executable(susu_mipt_cpp week-6--quicksort/b--applicants.cpp)
+#add_executable(susu_mipt_cpp week-6--quicksort/b--applicants.cpp)
 #add_executable(susu_mipt_cpp week-6--quicksort/c--top-three.cpp)
-#add_executable(susu_mipt_cpp week-6--quicksort/d--chimneysweep.cpp)
+add_executable(susu_mipt_cpp week-6--quicksort/d--chimneysweep.cpp)
 
 # [week-7]
 #add_executable(susu_mipt_cpp week-7--heapsort-and-countingsort/a--heap.cpp)
