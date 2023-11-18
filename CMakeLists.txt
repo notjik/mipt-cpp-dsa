@@ -75,7 +75,7 @@ set(CMAKE_CXX_STANDARD 17)
 #add_executable(susu_mipt_cpp week-6--quicksort/a--quick-sort-and-quote-from-dead-souls.cpp)
 #add_executable(susu_mipt_cpp week-6--quicksort/b--applicants.cpp)
 #add_executable(susu_mipt_cpp week-6--quicksort/c--top-three.cpp)
-add_executable(susu_mipt_cpp week-6--quicksort/d--chimneysweep.cpp)
+#add_executable(susu_mipt_cpp week-6--quicksort/d--chimneysweep.cpp)
 
 # [week-7]
 #add_executable(susu_mipt_cpp week-7--heapsort-and-countingsort/a--heap.cpp)
@@ -87,3 +87,8 @@ add_executable(susu_mipt_cpp week-6--quicksort/d--chimneysweep.cpp)
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/d--atm.cpp)
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/f--optimal-theft.cpp)
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/g--the-backpack-problem.cpp)
+
+
+# [week-9]
+#add_executable(susu_mipt_cpp week-9--lists/a--simple-stack.cpp)
+add_executable(susu_mipt_cpp week-9--lists/b--simple-queue.cpp)
