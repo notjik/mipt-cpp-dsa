@@ -86,7 +86,9 @@ set(CMAKE_CXX_STANDARD 17)
 # [week-8]
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/a--nth-number-fibonacci.cpp)
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/b--stones.cpp)
+#add_executable(susu_mipt_cpp week-8--dynamic-programming/c--buying-tickets.cpp)
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/d--atm.cpp)
+add_executable(susu_mipt_cpp week-8--dynamic-programming/e--compare-regexp.cpp)
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/f--optimal-theft.cpp)
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/g--the-backpack-problem.cpp)
 
@@ -102,4 +104,4 @@ set(CMAKE_CXX_STANDARD 17)
 # [week-11]
 #add_executable(susu_mipt_cpp week-11--cstring-and-treep/cstring.cpp
 #        week-11--cstring-and-treep/cstring.h)
-add_executable(susu_mipt_cpp week-11--cstring-and-treep/main.cpp)
+#add_executable(susu_mipt_cpp week-11--cstring-and-treep/main.cpp)
