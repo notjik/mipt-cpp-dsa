@@ -1,140 +1,83 @@
 #include <iostream>
-#include <vector>
-using namespace std;
 
-// Класс для реализации приоритетной очереди с помощью пирамиды
-class PriorityQueue {
-  // Вектор для хранения элементов пирамиды
-  vector<int> heap;
-  // Максимальный размер пирамиды
-  int capacity;
-  // Текущий размер пирамиды
-  int size;
-
-  // Функция для получения индекса родителя узла i
-  int parent(int i) {
-    return (i - 1) / 2;
-  }
-
-  // Функция для получения индекса левого потомка узла i
-  int left(int i) {
-    return 2 * i + 1;
-  }
-
-  // Функция для получения индекса правого потомка узла i
-  int right(int i) {
-    return 2 * i + 2;
-  }
-
-  // Функция для просеивания элемента вверх по пирамиде
-  void siftUp(int i) {
-    // Пока элемент не достиг корня и больше своего родителя
-    while (i > 0 && heap[i] > heap[parent(i)]) {
-      // Меняем местами элемент и его родителя
-      swap(heap[i], heap[parent(i)]);
-      // Переходим к родителю
-      i = parent(i);
+void SiftUp(int* arr, int id) {
+  while (id > 0) {
+    int parent = (id - 1) / 2;
+    if (arr[parent] < arr[id]) {
+      std::swap(arr[parent], arr[id]);
+      id = parent;
+    } else {
+      break;
     }
   }
+  std::cout << id + 1 << '\n';
+}
 
-  // Функция для просеивания элемента вниз по пирамиде
-  void siftDown(int i) {
-    // Пока элемент не достиг листа
-    while (left(i) < size) {
-      // Находим индекс наибольшего из потомков
-      int maxChild = left(i);
-      if (right(i) < size && heap[right(i)] > heap[maxChild]) {
-        maxChild = right(i);
-      }
-      // Если элемент больше или равен наибольшему потомку, то останавливаемся
-      if (heap[i] >= heap[maxChild]) {
-        break;
-      }
-      // Иначе меняем местами элемент и наибольшего потомка
-      swap(heap[i], heap[maxChild]);
-      // Переходим к наибольшему потомку
-      i = maxChild;
+void SiftDown(int* arr, int n, int id) {
+  while (id < n) {
+    int child_1 = id * 2 + 1;
+    int child_2 = id * 2 + 2;
+    int id_max = id;
+    if (child_1 < n && child_2 < n && (arr[child_1] > arr[id_max] || arr[child_2] > arr[id_max])) {
+      id_max = (arr[child_1] >= arr[child_2] ? child_1 : child_2);
+    } else if (child_1 < n && child_2 >= n && arr[child_1] > arr[id_max]) {
+      id_max = child_1;
+    }
+    if (id_max != id) {
+      std::swap(arr[id], arr[id_max]);
+      id = id_max;
+    } else {
+      break;
     }
   }
+  std::cout << id + 1 << " ";
+}
 
- public:
-  // Конструктор класса, принимающий максимальный размер пирамиды
-  PriorityQueue(int cap) {
-    capacity = cap;
-    size = 0;
-    heap.resize(cap);
+void ExtractMax(int* arr, int& n) {
+  std::swap(arr[0], arr[n - 1]);
+  int del = arr[n - 1];
+  n -= 1;
+  if (n > 0) {
+    SiftDown(arr, n, 0);
+  } else {
+    std::cout << "0 ";
   }
+  std::cout << del << '\n';
+}
 
-  // Функция для добавления элемента в пирамиду
-  void insert(int x) {
-    // Если пирамида заполнена, то ничего не делаем
-    if (size == capacity) {
-      cout << -1 << endl;
-      return;
-    }
-    // Добавляем элемент в конец вектора
-    heap[size] = x;
-    // Увеличиваем размер пирамиды
-    size++;
-    // Просеиваем элемент вверх по пирамиде
-    siftUp(size - 1);
-    // Выводим индекс добавленного элемента
-    cout << size - 1 << endl;
-  }
+void Push(int*& arr, int& capacity, int element) {
+  arr[capacity] = element;
+  SiftUp(arr, capacity);
+  capacity += 1;
+}
 
-  // Функция для извлечения максимального элемента из пирамиды
-  void extractMax() {
-    // Если пирамида пуста, то ничего не делаем
-    if (size == 0) {
-      cout << -1 << endl;
-      return;
-    }
-    // Сохраняем значение максимального элемента
-    int max = heap[0];
-    // Меняем местами максимальный элемент и последний элемент вектора
-    swap(heap[0], heap[size - 1]);
-    // Уменьшаем размер пирамиды
-    size--;
-    // Просеиваем элемент вниз по пирамиде
-    siftDown(0);
-    // Выводим индекс конечного положения элемента и значение максимального элемента
-    cout << 0 << " " << max << endl;
-  }
-
-  // Функция для вывода пирамиды в её конечном состоянии
-  void print() {
-    for (int i = 0; i < size; i++) {
-      cout << heap[i] << " ";
-    }
-    cout << endl;
-  }
-};
-
-// Главная функция программы
 int main() {
-  // Вводим максимальный размер пирамиды и количество запросов
-  int N, M;
-  cin >> N >> M;
-  // Создаем объект класса PriorityQueue
-  PriorityQueue pq(N);
-  // Обрабатываем запросы
-  for (int i = 0; i < M; i++) {
-    // Вводим тип запроса
-    int type;
-    cin >> type;
-    // Если тип 1, то извлекаем максимальный элемент
-    if (type == 1) {
-      pq.extractMax();
-    }
-      // Если тип 2, то добавляем элемент в пирамиду
-    else if (type == 2) {
-      // Вводим значение элемента
-      int x;
-      cin >> x;
-      pq.insert(x);
+  int n, m;
+  std::cin >> n >> m;
+  auto* arr = new int[n];
+  int capacity = 0;
+  for (int i = 0; i < m; i++) {
+    int command;
+    std::cin >> command;
+    if (command == 1) {
+      if (capacity > 0) {
+        ExtractMax(arr, capacity);
+      } else {
+        std::cout << "-1\n";
+      }
+    } else {
+      int val;
+      std::cin >> val;
+      if (capacity < n) {
+        Push(arr, capacity, val);
+      } else {
+        std::cout << "-1\n";
+      }
     }
   }
-  // Выводим пирамиду в её конечном состоянии
-  pq.print();
+  for (int i = 0; i < capacity; i++) {
+    std::cout << arr[i] << " ";
+  }
+  delete[] arr;
   return 0;
 }

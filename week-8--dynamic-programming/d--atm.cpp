@@ -12,7 +12,7 @@ int main() {
   int* dp = new int[s + 1];
 
   for (int i = 0; i <= s; i++) {
-    dp[i] = 10e9;
+    dp[i] = static_cast<int>(10e9);
   }
   dp[0] = 0;
   for (int i = 0; i < n; i++) {

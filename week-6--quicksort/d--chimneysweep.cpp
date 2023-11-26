@@ -81,6 +81,10 @@ void QuickSortBackend(int* arr, int left, int right,
   }
 }
 
+void QuickSort(int* arr, int size, bool reverse = false) {
+  QuickSortBackend(arr, 0, size - 1, reverse);
+}
+
 int main() {
   int n, k;
   std::cin >> n;

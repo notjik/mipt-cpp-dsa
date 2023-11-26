@@ -79,11 +79,13 @@ set(CMAKE_CXX_STANDARD 17)
 
 # [week-7]
 #add_executable(susu_mipt_cpp week-7--heapsort-and-countingsort/a--heap.cpp)
+#add_executable(susu_mipt_cpp week-7--heapsort-and-countingsort/b--heapsort.cpp)
 #add_executable(susu_mipt_cpp week-7--heapsort-and-countingsort/c--priority-queue.cpp)
 #add_executable(susu_mipt_cpp week-7--heapsort-and-countingsort/d--counting-sort.cpp)
 
 # [week-8]
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/a--nth-number-fibonacci.cpp)
+#add_executable(susu_mipt_cpp week-8--dynamic-programming/b--stones.cpp)
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/d--atm.cpp)
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/f--optimal-theft.cpp)
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/g--the-backpack-problem.cpp)
@@ -91,4 +93,13 @@ set(CMAKE_CXX_STANDARD 17)
 
 # [week-9]
 #add_executable(susu_mipt_cpp week-9--lists/a--simple-stack.cpp)
-add_executable(susu_mipt_cpp week-9--lists/b--simple-queue.cpp)
+#add_executable(susu_mipt_cpp week-9--lists/b--simple-queue.cpp)
+
+# [week-10]
+#add_executable(susu_mipt_cpp week-10--bst/a--count-elements.cpp)
+#add_executable(susu_mipt_cpp week-10--bst/main.cpp)
+
+# [week-11]
+#add_executable(susu_mipt_cpp week-11--cstring-and-treep/cstring.cpp
+#        week-11--cstring-and-treep/cstring.h)
+add_executable(susu_mipt_cpp week-11--cstring-and-treep/main.cpp)

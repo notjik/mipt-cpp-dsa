@@ -1,144 +1,158 @@
+#include <cstring>
 #include <iostream>
-#include <vector>
-#include <stack>
-#include <algorithm>
-
-using namespace std;
 
 struct Heap {
-  vector<int> elements; // Храним элементы пирамиды в векторе.
-  stack<int> deleted;   // Храним индексы удаленных элементов для операции delete.
+  int* _array;
+  int* _insertion_order;
+  int _size = 0;
+  int _capacity;
 
-  void insert(int n) {
-    elements.push_back(n); // Добавляем элемент в конец вектора.
-    int idx = elements.size() - 1;
+  explicit Heap(int capacity) {
+    _capacity = capacity;
+    _array = new int[_capacity];
+    _insertion_order = new int[_capacity];
+  }
 
-    // Восстанавливаем свойство мин-пирамиды, поднимая элемент вверх.
-    while (idx > 0 && elements[idx] < elements[(idx - 1) / 2]) {
-      swap(elements[idx], elements[(idx - 1) / 2]);
-      idx = (idx - 1) / 2;
+  ~Heap() {
+    delete[] _array;
+    delete[] _insertion_order;
+  }
+
+  int LeftChild(int index) {
+    return 2 * index + 1;
+  }
+
+  int RightChild(int index) {
+    return 2 * index + 2;
+  }
+
+  void SiftUp(int i) {
+    while (i > 0 && _array[(i - 1) / 2] > _array[i]) {
+      std::swap(_array[i], _array[(i - 1) / 2]);
+      i = (i - 1) / 2;
     }
-
-    cout << "ok\n";
   }
 
-  int extract_min() {
-    if (elements.empty()) {
-      cout << "error\n";
-      return -1;
-    }
+  void SiftDown(int i) {
+    int left = LeftChild(i);
+    int right = RightChild(i);
+    int smallest = i;
 
-    int min_value = elements[0];
-    swap(elements[0], elements.back());
-    elements.pop_back();
-    heapify(0); // Восстанавливаем свойство мин-пирамиды.
-    return min_value;
-  }
-
-  void delete_element(int x) {
-    if (x <= 0 || x > elements.size() || deleted.size() >= x) {
-      cout << "error\n";
-      return;
-    }
-
-    x = elements.size() - x; // Пересчитываем индекс.
-    deleted.push(x);
-    swap(elements[x], elements.back());
-    elements.pop_back();
-    heapify(x); // Восстанавливаем свойство мин-пирамиды.
-    cout << "ok\n";
-  }
-
-  void change(int x, int n) {
-    if (x <= 0 || x > elements.size() || deleted.size() >= x) {
-      cout << "error\n";
-      return;
-    }
-
-    x = elements.size() - x; // Пересчитываем индекс.
-    elements[x] = n;
-
-    // Перестраиваем пирамиду, чтобы восстановить свойство мин-пирамиды.
-    while (x > 0 && elements[x] < elements[(x - 1) / 2]) {
-      swap(elements[x], elements[(x - 1) / 2]);
-      x = (x - 1) / 2;
-    }
-
-    heapify(x);
-    cout << "ok\n";
-  }
-
-  int get_min() {
-    if (elements.empty()) {
-      cout << "error\n";
-      return -1;
-    }
-    return elements[0];
-  }
-
-  int size() {
-    return elements.size();
-  }
-
-  void clear() {
-    elements.clear();
-    deleted = stack<int>(); // Очищаем стек удаленных элементов.
-    cout << "ok\n";
-  }
-
- private:
-  void heapify(int idx) {
-    int smallest = idx;
-    int left = 2 * idx + 1;
-    int right = 2 * idx + 2;
-
-    if (left < elements.size() && elements[left] < elements[smallest])
+    if (left < _size && _array[left] < _array[i]) {
       smallest = left;
-
-    if (right < elements.size() && elements[right] < elements[smallest])
-      smallest = right;
-
-    if (smallest != idx) {
-      swap(elements[idx], elements[smallest]);
-      heapify(smallest);
     }
+
+    if (right < _size && _array[right] < _array[smallest]) {
+      smallest = right;
+    }
+
+    if (smallest != i) {
+      std::swap(_array[i], _array[smallest]);
+      SiftDown(smallest);
+    }
+  }
+
+  int Find(int val) {
+    for (int i = 0; i < _size; i++) {
+      if (_array[i] == val) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  void Insert(int n) {
+    _array[_size] = n;
+    _insertion_order[_size] = n;
+    SiftUp(_size);
+    _size++;
+    std::cout << "ok" << std::endl;
+  }
+
+  void ExtractMin() {
+    if (_size == 0) {
+      std::cout << "error" << std::endl;
+      return;
+    }
+    int result = _array[0];
+    _array[0] = _array[_size - 1];
+    _size--;
+    if (_size > 0) {
+      SiftDown(0);
+    }
+    std::cout << result << std::endl;
+  }
+
+  void Delete(int x) {
+    if (_size == 0) {
+      std::cout << "error" << std::endl;
+      return;
+    }
+    int index = Find(_insertion_order[x - 1]);
+    _array[index] = _array[_size - 1];
+    _size--;
+    SiftDown(index);
+    std::cout << "ok" << std::endl;
+  }
+
+  void Change(int x, int n) {
+    int index = Find(_insertion_order[x - 1]);
+    if (index == -1) {
+      std::cout << "error" << std::endl;
+      return;
+    }
+    _array[index] = n;
+    SiftDown(index);
+  }
+
+  void GetMin() {
+    if (_size == 0) {
+      std::cout << "error" << std::endl;
+      return;
+    }
+    std::cout << _array[0] << std::endl;
+  }
+
+  void Size() {
+    std::cout << _size << std::endl;
+  }
+
+  void Clear() {
+    _size = 0;
+    std::cout << "ok" << std::endl;
   }
 };
 
 int main() {
-  Heap heap;
-  int n;
-  cin >> n;
-
-  for (int i = 0; i < n; ++i) {
-    string command;
-    cin >> command;
-    if (command == "insert") {
-      int value;
-      cin >> value;
-      heap.insert(value);
-    } else if (command == "extract_min") {
-      int result = heap.extract_min();
-      if (result != -1)
-        cout << result << '\n';
-    } else if (command == "delete") {
+  int m1;
+  std::cin >> m1;
+  const int m = m1;
+  auto* heap = new Heap(m);
+  char str[12];
+  for (int i = 0; i < m; i++) {
+    std::cin >> str;
+    if (!strcmp(str, "insert")) {
+      int n;
+      std::cin >> n;
+      heap->Insert(n);
+    } else if (!strcmp(str, "extract_min")) {
+      heap->ExtractMin();
+    } else if (!strcmp(str, "delete")) {
       int x;
-      cin >> x;
-      heap.delete_element(x);
-    } else if (command == "change") {
+      std::cin >> x;
+      heap->Delete(x);
+    } else if (!strcmp(str, "change")) {
       int x, n;
-      cin >> x >> n;
-      heap.change(x, n);
-    } else if (command == "get_min") {
-      int result = heap.get_min();
-      if (result != -1)
-        cout << result << '\n';
-    } else if (command == "size") {
-      cout << heap.size() << '\n';
-    } else if (command == "clear") {
-      heap.clear();
+      std::cin >> x >> n;
+      heap->Change(x, n);
+    } else if (!strcmp(str, "get_min")) {
+      heap->GetMin();
+    } else if (!strcmp(str, "size")) {
+      heap->Size();
+    } else if (!strcmp(str, "clear")) {
+      heap->Clear();
     }
   }
-
+  delete heap;
   return 0;
 }
