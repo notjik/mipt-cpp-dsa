@@ -96,7 +96,8 @@ set(CMAKE_CXX_STANDARD 17)
 # [week-9]
 #add_executable(susu_mipt_cpp week-9--lists/a--simple-stack.cpp)
 #add_executable(susu_mipt_cpp week-9--lists/b--simple-queue.cpp)
-add_executable(susu_mipt_cpp week-9--lists/c--remove-brackets.cpp)
+#add_executable(susu_mipt_cpp week-9--lists/c--remove-brackets.cpp)
+add_executable(susu_mipt_cpp week-9--lists/d--containers.cpp)
 
 # [week-10]
 #add_executable(susu_mipt_cpp week-10--bst/a--count-elements.cpp)
