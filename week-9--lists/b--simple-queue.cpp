@@ -3,7 +3,7 @@
 
 struct Node {
   int _val;
-  Node* _next = nullptr;
+  Node* _next;
 };
 
 struct Queue {
@@ -11,14 +11,16 @@ struct Queue {
   Node* _tail = nullptr;
   size_t _size = 0;
 
-  size_t Size() {
+  [[nodiscard]] size_t Size() const {
     return _size;
   }
 
-  void Push(int val) {
-    Node* node = new Node{val, nullptr};
-    if (!Size()) {
-      _head = node;
+  void Push(int key) {
+    auto* node = new Node{key, nullptr};
+    if (_size == 0) {
+      _head = _tail = node;
+      _size++;
+      return;
     }
     _tail->_next = node;
     _tail = node;
@@ -29,17 +31,20 @@ struct Queue {
     if (!Size()) {
       return;
     }
-    Node* save = _head->_next;
-    delete _head;
-    _head = save;
+    Node* node = _head;
+    _head = node->_next;
+    delete node;
+    if (_head == nullptr) {
+      _tail = nullptr;
+    }
     _size--;
   }
 
-  void Front() {
+  void Front() const {
     if (!Size()) {
       return;
     }
-    std::cout << _head->_val << '\n';
+    std::cout << _head->_val << "\n";
   }
 
   void Clear() {
@@ -50,32 +55,33 @@ struct Queue {
 };
 
 int main() {
-  size_t n;
+  int n;
   std::cin >> n;
   char str[6];
   Queue queue;
-  for (size_t i = 0; i < n; i++) {
+  for (int i = 0; i < n; i++) {
     std::cin >> str;
-    if (!strcmp(str, "push")) {
-      int val;
-      std::cin >> val;
-      queue.Push(val);
-      std::cout << "ok" << '\n';
-    } else if (!strcmp(str, "pop")) {
+    if (strcmp(str, "pop") == 0) {
       queue.Front();
       queue.Pop();
-    } else if (!strcmp(str, "front")) {
+    } else if (strcmp(str, "push") == 0) {
+      int key;
+      std::cin >> key;
+      queue.Push(key);
+      std::cout << "ok" << '\n';
+    } else if (strcmp(str, "front") == 0) {
       queue.Front();
-    } else if (!strcmp(str, "size")) {
+    } else if (strcmp(str, "size") == 0) {
       std::cout << queue.Size() << '\n';
-    } else if (!strcmp(str, "clear")) {
+    } else if (strcmp(str, "clear") == 0) {
       queue.Clear();
       std::cout << "ok" << '\n';
-    } else if (!strcmp(str, "exit")) {
-      queue.Clear();
+    } else if (strcmp(str, "exit") == 0) {
       std::cout << "bye" << '\n';
+      queue.Clear();
       break;
     }
   }
   queue.Clear();
+  return 0;
 }
