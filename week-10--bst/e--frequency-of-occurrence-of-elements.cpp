@@ -2,6 +2,7 @@
 
 struct Node {
   int val;
+  int count;
   Node* left = nullptr;
   Node* right = nullptr;
   Node* parent = nullptr;
@@ -40,11 +41,14 @@ void InsertImpl(Node* root, Node* node) {
 }
 
 void Insert(Node* root, int val) {
-  if (Search(root, val)) {
+  Node* pre_insert = Search(root, val);
+  if (pre_insert) {
+    pre_insert->count++;
     return;
   }
   auto* node = new Node;
   node->val = val;
+  node->count = 1;
   InsertImpl(root, node);
 }
 
@@ -118,6 +122,10 @@ void Erase(Node* node) {
   }
 }
 
+void Erase(Node* root, int key) {
+  Erase(Search(root, key));
+}
+
 void Clear(Node* root) {
   if (root != nullptr) {
     Clear(root->left);
@@ -129,7 +137,7 @@ void Clear(Node* root) {
 void InorderWalk(Node* root) {
   if (root != nullptr) {
     InorderWalk(root->left);
-    std::cout << root->val << ' ';
+    std::cout << root->val << ' ' << root->count << '\n';
     InorderWalk(root->right);
   }
 }
@@ -153,7 +161,7 @@ void PostorderWalk(Node* root) {
 int main() {
   int num;
   std::cin >> num;
-  auto* root = new Node{num};
+  auto* root = new Node{num, 1};
   while (num != 0) {
     std::cin >> num;
     if (num == 0) {

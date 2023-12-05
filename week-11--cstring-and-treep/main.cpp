@@ -1,6 +1,6 @@
 #include <cstring>
-#include <iostream>
-#include <random>
+  #include <iostream>
+  #include <random>
 
 struct Node {
   int key;
@@ -22,11 +22,20 @@ class Treap {
  private:
   Node* Merge(Node* left, Node* right);
   Pair Split(Node* root, int key);
+  Node* FindMin(Node* root, int key);
  public:
-  void Insert(Node* root, int key);
+  Node* Insert(Node* root, int key, std::mt19937& gen);
   void Print(Node* root);
   void Delete(Node* root);
+  Node* Remove(Node* root, int key);
 };
+
+Node* Treap::Insert(Node* root, int key, std::mt19937& gen) {
+  Pair q = Split(root, key);
+  Node* T = new Node(key, gen);
+  Node* tmp = Merge(q.left, T);
+  return Merge(tmp, q.right);
+}
 
 Node* Treap::Merge(Node* left, Node* right) {
   if (left == nullptr) {
@@ -71,6 +80,36 @@ void Treap::Delete(Node* root) {
     Delete(root->right);
     delete root;
   }
+}
+
+Node* Treap::FindMin(Node* root, int key) {
+  if(root->left == nullptr){
+    return root;
+  }
+  if(root->left->left == nullptr){
+    return root;
+  }
+  Node* next = root->left;
+  Node* prev = root;
+  while(next->left != nullptr){
+    prev = prev->left;
+    next = prev->left;
+  }
+  return prev;
+}
+
+Node* Treap::Remove(Node* root, int key){
+  if (key == root->key) {
+    Node* new_root = Merge(root->left, root->right);
+    delete root;
+    return new_root;
+  }
+  if (key > root->key) {
+    root->right = Remove(root->right, key);
+  } else {
+    root->left = Remove(root->left, key);
+  }
+  return root
 }
 
 int main() {

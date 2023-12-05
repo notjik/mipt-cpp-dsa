@@ -150,6 +150,24 @@ void PostorderWalk(Node* root) {
   }
 }
 
+int Height(Node* root) {
+  if (root == nullptr) {
+    return 0;
+  }
+  return std::max(Height(root->left), Height(root->right)) + 1;
+}
+
+void BFactor(Node* root, bool& result) {
+  if (root != nullptr) {
+    BFactor(root->left, result);
+    if (abs(Height(root->left) - Height(root->right)) > 1) {
+      result = false;
+      return;
+    }
+    BFactor(root->right, result);
+  }
+}
+
 int main() {
   int num;
   std::cin >> num;
@@ -161,7 +179,9 @@ int main() {
     }
     Insert(root, num);
   }
-  InorderWalk(root);
+  bool result = true;
+  BFactor(root, result);
+  std::cout << (result ? "YES" : "NO");
   Clear(root);
   return 0;
 }

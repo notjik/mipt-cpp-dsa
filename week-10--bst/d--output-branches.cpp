@@ -150,6 +150,16 @@ void PostorderWalk(Node* root) {
   }
 }
 
+void InorderFindWalk(Node* root) {
+  if (root != nullptr) {
+    InorderFindWalk(root->left);
+    if ((root->left == nullptr || root->right == nullptr) && !(root->left == nullptr && root->right == nullptr)) {
+      std::cout << root->val << ' ';
+    }
+    InorderFindWalk(root->right);
+  }
+}
+
 int main() {
   int num;
   std::cin >> num;
@@ -161,7 +171,7 @@ int main() {
     }
     Insert(root, num);
   }
-  InorderWalk(root);
+  InorderFindWalk(root);
   Clear(root);
   return 0;
 }

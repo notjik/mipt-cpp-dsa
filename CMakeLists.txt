@@ -97,13 +97,19 @@ set(CMAKE_CXX_STANDARD 17)
 #add_executable(susu_mipt_cpp week-9--lists/a--simple-stack.cpp)
 #add_executable(susu_mipt_cpp week-9--lists/b--simple-queue.cpp)
 #add_executable(susu_mipt_cpp week-9--lists/c--remove-brackets.cpp)
-add_executable(susu_mipt_cpp week-9--lists/d--containers.cpp)
+#add_executable(susu_mipt_cpp week-9--lists/d--containers.cpp)
 
 # [week-10]
 #add_executable(susu_mipt_cpp week-10--bst/a--count-elements.cpp)
-#add_executable(susu_mipt_cpp week-10--bst/main.cpp)
+#add_executable(susu_mipt_cpp week-10--bst/b--traversing.cpp)
+#add_executable(susu_mipt_cpp week-10--bst/c--balance.cpp)
+#add_executable(susu_mipt_cpp week-10--bst/d--output-branches.cpp)
+add_executable(susu_mipt_cpp week-10--bst/e--frequency-of-occurrence-of-elements.cpp)
 
 # [week-11]
 #add_executable(susu_mipt_cpp week-11--cstring-and-treep/cstring.cpp
 #        week-11--cstring-and-treep/cstring.h)
 #add_executable(susu_mipt_cpp week-11--cstring-and-treep/main.cpp)
+
+# [week-12]
+#add_executable(susu_mipt_cpp week-12--avl-tree/main.cpp)
