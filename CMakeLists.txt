@@ -104,11 +104,11 @@ set(CMAKE_CXX_STANDARD 17)
 #add_executable(susu_mipt_cpp week-10--bst/b--traversing.cpp)
 #add_executable(susu_mipt_cpp week-10--bst/c--balance.cpp)
 #add_executable(susu_mipt_cpp week-10--bst/d--output-branches.cpp)
-add_executable(susu_mipt_cpp week-10--bst/e--frequency-of-occurrence-of-elements.cpp)
+#add_executable(susu_mipt_cpp week-10--bst/e--frequency-of-occurrence-of-elements.cpp)
 
 # [week-11]
-#add_executable(susu_mipt_cpp week-11--cstring-and-treep/cstring.cpp
-#        week-11--cstring-and-treep/cstring.h)
+add_executable(susu_mipt_cpp week-11--cstring-and-treep/cstring.cpp
+        week-11--cstring-and-treep/cstring.h)
 #add_executable(susu_mipt_cpp week-11--cstring-and-treep/main.cpp)
 
 # [week-12]

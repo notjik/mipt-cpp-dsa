@@ -9,4 +9,8 @@ int Strcmp(const char* first, const char* second);
 
 int Strncmp(const char* first, const char* second, size_t count);
 
+char* Strcat(char* dest, const char* src);
+
+char* Strncat(char* dest, const char* src, size_t count);
+
 #endif //SUSU_MIPT_CPP_WEEK_11_CSTRING_AND_TREEP_CSTRING_H_

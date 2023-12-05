@@ -1,11 +1,11 @@
 #include "cstring.h"
 
 size_t Strlen(const char* str) {
-  int count = 0;
-  while (str[count] != '\0') {
-    count++;
+  int i = 0;
+  while (str[i] != '\0') {
+    i++;
   }
-  return count;
+  return i;
 }
 
 int Strcmp(const char* first, const char* second) {
@@ -25,8 +25,33 @@ int Strncmp(const char* first, const char* second, size_t count) {
   return (!count ? 0 : *first - *second);
 }
 
+char* Strcat(char* dest, const char* src) {
+  int count_dest = Strlen(dest);
+  int i = 0;
+  while (src[i] != '\0') {
+    dest[count_dest + i] = src[i];
+    i++;
+  }
+  dest[count_dest + i] = '\0';
+  return dest;
+}
+
+char* Strncat(char* dest, const char* src, size_t count) {
+  int count_dest = Strlen(dest);
+  int i = 0;
+  while (src[i] != '\0' && i < count) {
+    dest[count_dest + i] = src[i];
+    i++;
+  }
+  while (i < count){
+    dest[count_dest + i] = '\0';
+    i++;
+  }
+  return dest;
+}
+
 int main() {
   char str1[] = {"cbc"};
   char str2[] = {"abc"};
-  std::cout << Strncmp(str1, str2, 0);
+  std::cout << Strncat(str1, str2, 2);
 }
