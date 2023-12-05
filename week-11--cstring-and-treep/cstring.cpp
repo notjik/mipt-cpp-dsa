@@ -25,6 +25,29 @@ int Strncmp(const char* first, const char* second, size_t count) {
   return (!count ? 0 : *first - *second);
 }
 
+char* Strcpy(char* dest, const char* src) {
+  int i = 0;
+  while (src[i] != '\0') {
+    dest[i] = src[i];
+    i++;
+  }
+  dest[i] = '\0';
+  return dest;
+}
+
+char* Strncpy(char* dest, const char* src, size_t count) {
+  int i = 0;
+  while (src[i] != '\0' && i < count) {
+    dest[i] = src[i];
+    i++;
+  }
+  while (i < count){
+    dest[i] = '\0';
+    i++;
+  }
+  return dest;
+}
+
 char* Strcat(char* dest, const char* src) {
   int count_dest = Strlen(dest);
   int i = 0;
@@ -43,6 +66,7 @@ char* Strncat(char* dest, const char* src, size_t count) {
     dest[count_dest + i] = src[i];
     i++;
   }
+  dest[count_dest + i] = '\0';
   while (i < count){
     dest[count_dest + i] = '\0';
     i++;
