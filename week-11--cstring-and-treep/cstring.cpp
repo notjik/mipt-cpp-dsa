@@ -1,3 +1,4 @@
+#include <cstring>
 #include "cstring.h"
 
 size_t Strlen(const char* str) {
@@ -168,4 +169,14 @@ const char* Strstr(const char* str, const char* pattern) {
     i++;
   }
   return nullptr;
+}
+
+
+int main() {
+  char* str1 = {"a"};
+  char* str2 = {"a"};
+  std::cout << Strstr(str1, str1);
+  std::cout << '\n';
+  std::cout << std::strstr(str1, str1);
+  return 0;
 }
