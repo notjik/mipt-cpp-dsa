@@ -13,4 +13,16 @@ char* Strcat(char* dest, const char* src);
 
 char* Strncat(char* dest, const char* src, size_t count);
 
+const char* Strchr(const char* str, char symbol);
+
+const char* Strrchr(const char* str, char symbol);
+
+size_t Strspn(const char* dest, const char* src);
+
+size_t Strcspn(const char* dest, const char* src);
+
+const char* Strpbrk(const char* dest, const char* breakset);
+
+const char* Strstr(const char* str, const char* pattern);
+
 #endif //SUSU_MIPT_CPP_WEEK_11_CSTRING_AND_TREEP_CSTRING_H_

@@ -1,7 +1,7 @@
 #include "cstring.h"
 
 size_t Strlen(const char* str) {
-  int i = 0;
+  size_t i = 0;
   while (str[i] != '\0') {
     i++;
   }
@@ -26,7 +26,7 @@ int Strncmp(const char* first, const char* second, size_t count) {
 }
 
 char* Strcpy(char* dest, const char* src) {
-  int i = 0;
+  size_t i = 0;
   while (src[i] != '\0') {
     dest[i] = src[i];
     i++;
@@ -36,12 +36,12 @@ char* Strcpy(char* dest, const char* src) {
 }
 
 char* Strncpy(char* dest, const char* src, size_t count) {
-  int i = 0;
+  size_t i = 0;
   while (src[i] != '\0' && i < count) {
     dest[i] = src[i];
     i++;
   }
-  while (i < count){
+  while (i < count) {
     dest[i] = '\0';
     i++;
   }
@@ -49,33 +49,123 @@ char* Strncpy(char* dest, const char* src, size_t count) {
 }
 
 char* Strcat(char* dest, const char* src) {
-  int count_dest = Strlen(dest);
-  int i = 0;
+  size_t size = Strlen(dest);
+  size_t i = 0;
   while (src[i] != '\0') {
-    dest[count_dest + i] = src[i];
+    dest[size + i] = src[i];
     i++;
   }
-  dest[count_dest + i] = '\0';
+  dest[size + i] = '\0';
   return dest;
 }
 
 char* Strncat(char* dest, const char* src, size_t count) {
-  int count_dest = Strlen(dest);
-  int i = 0;
+  size_t size = Strlen(dest);
+  size_t i = 0;
   while (src[i] != '\0' && i < count) {
-    dest[count_dest + i] = src[i];
+    dest[size + i] = src[i];
     i++;
   }
-  dest[count_dest + i] = '\0';
-  while (i < count){
-    dest[count_dest + i] = '\0';
+  while (i < count) {
+    dest[size + i] = '\0';
     i++;
   }
   return dest;
 }
 
-int main() {
-  char str1[] = {"cbc"};
-  char str2[] = {"abc"};
-  std::cout << Strncat(str1, str2, 2);
+const char* Strchr(const char* str, char symbol) {
+  size_t size = Strlen(str);
+  size_t i = 0;
+  while (i <= size) {
+    if (*(str + i) == symbol) {
+      return str + i;
+    }
+    i++;
+  }
+  return nullptr;
+}
+
+const char* Strrchr(const char* str, char symbol) {
+  size_t size = Strlen(str);
+  size_t i = 0;
+  while (i <= size) {
+    if (*(str + size - i) == symbol) {
+      return str + size - i;
+    }
+    i++;
+  }
+  return nullptr;
+}
+
+size_t Strspn(const char* dest, const char* src) {
+  size_t result = 0;
+  size_t i = 0;
+  while (dest[i] != '\0') {
+    size_t j = 0;
+    while (src[j] != '\0') {
+      if (src[j] == dest[i]) {
+        i++;
+        result++;
+        break;
+      }
+      j++;
+    }
+    if (src[j] == '\0') {
+      break;
+    }
+  }
+  return result;
+}
+
+size_t Strcspn(const char* dest, const char* src) {
+  size_t result = 0;
+  size_t i = 0;
+  while (dest[i] != '\0') {
+    size_t j = 0;
+    while (src[j] != '\0') {
+      if (src[j] == dest[i]) {
+        return result;
+      }
+      j++;
+    }
+    if (src[j] == '\0') {
+      i++;
+      result++;
+    }
+  }
+  return result;
+}
+
+const char* Strpbrk(const char* dest, const char* breakset) {
+  size_t i = 0;
+  while (*(dest + i) != '\0') {
+    size_t j = 0;
+    while (*(breakset + j) != '\0') {
+      if (*(breakset + j) == *(dest + i)) {
+        return dest + i;
+      }
+      j++;
+    }
+    i++;
+  }
+  return nullptr;
+}
+
+const char* Strstr(const char* str, const char* pattern) {
+  size_t i = 0;
+  size_t length_pattern = Strlen(pattern);
+  while (*(str + i) != '\0') {
+    size_t j = 0;
+    while (*(pattern + j) != '\0') {
+      if (*(pattern + j) != *(str + i + j)) {
+        break;
+      }
+      j++;
+    }
+    if (j == length_pattern) {
+      return str + i;
+    }
+    i++;
+  }
+  return nullptr;
 }
