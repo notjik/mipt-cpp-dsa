@@ -9,6 +9,10 @@ int Strcmp(const char* first, const char* second);
 
 int Strncmp(const char* first, const char* second, size_t count);
 
+char* Strcpy(char* dest, const char* src);
+
+char* Strncpy(char* dest, const char* src, size_t count);
+
 char* Strcat(char* dest, const char* src);
 
 char* Strncat(char* dest, const char* src, size_t count);

@@ -49,3 +49,6 @@ cmake-bild-debug/
 .idea/
 # Project exclude paths
 /cmake-build-debug/
+
+# Custom
+.zip
