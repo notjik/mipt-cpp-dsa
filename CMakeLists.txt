@@ -107,9 +107,10 @@ set(CMAKE_CXX_STANDARD 17)
 #add_executable(susu_mipt_cpp week-10--bst/e--frequency-of-occurrence-of-elements.cpp)
 
 # [week-11]
-add_executable(susu_mipt_cpp week-11--cstring-and-treep/cstring.cpp
-        week-11--cstring-and-treep/cstring.h)
-#add_executable(susu_mipt_cpp week-11--cstring-and-treep/main.cpp)
+#add_executable(susu_mipt_cpp week-11--cstring-and-treep/a--cstring/cstring.cpp
+#        week-11--cstring-and-treep/a--cstring/cstring.h)
+#add_executable(susu_mipt_cpp week-11--cstring-and-treep/b--traversing.cpp)
+add_executable(susu_mipt_cpp week-11--cstring-and-treep/c--cartesian-search-tree.cpp)
 
 # [week-12]
 #add_executable(susu_mipt_cpp week-12--avl-tree/main.cpp)

@@ -7,7 +7,7 @@ struct Node {
   Node* parent = nullptr;
 };
 
-Node* Search(Node* root, int key) {
+Node* FindBackend(Node* root, int key) {
   if (root == nullptr || key == root->val) {
     return root;
   }

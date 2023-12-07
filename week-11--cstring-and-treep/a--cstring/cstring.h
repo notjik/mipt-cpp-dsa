@@ -1,5 +1,5 @@
-#ifndef SUSU_MIPT_CPP_WEEK_11_CSTRING_AND_TREEP_CSTRING_H_
-#define SUSU_MIPT_CPP_WEEK_11_CSTRING_AND_TREEP_CSTRING_H_
+#ifndef SUSU_MIPT_CPP_WEEK_11_CSTRING_AND_TREEP_A_CSTRING_CSTRING_H_
+#define SUSU_MIPT_CPP_WEEK_11_CSTRING_AND_TREEP_A_CSTRING_CSTRING_H_
 
 #include <iostream>
 
@@ -29,4 +29,4 @@ const char* Strpbrk(const char* dest, const char* breakset);
 
 const char* Strstr(const char* str, const char* pattern);
 
-#endif  // SUSU_MIPT_CPP_WEEK_11_CSTRING_AND_TREEP_CSTRING_H_
+#endif  // SUSU_MIPT_CPP_WEEK_11_CSTRING_AND_TREEP_A_CSTRING_CSTRING_H_
