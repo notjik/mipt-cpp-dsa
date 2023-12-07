@@ -155,7 +155,7 @@ const char* Strpbrk(const char* dest, const char* breakset) {
 const char* Strstr(const char* str, const char* pattern) {
   size_t i = 0;
   size_t length_pattern = Strlen(pattern);
-  while (*(str + i) != '\0') {
+  do {
     size_t j = 0;
     while (*(pattern + j) != '\0') {
       if (*(pattern + j) != *(str + i + j)) {
@@ -166,17 +166,6 @@ const char* Strstr(const char* str, const char* pattern) {
     if (j == length_pattern) {
       return str + i;
     }
-    i++;
-  }
+  } while (*(str + i++) != '\0');
   return nullptr;
-}
-
-
-int main() {
-  char* str1 = {"a"};
-  char* str2 = {"a"};
-  std::cout << Strstr(str1, str1);
-  std::cout << '\n';
-  std::cout << std::strstr(str1, str1);
-  return 0;
 }
