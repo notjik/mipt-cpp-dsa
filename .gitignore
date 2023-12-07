@@ -51,4 +51,4 @@ cmake-bild-debug/
 /cmake-build-debug/
 
 # Custom
-.zip
+*.zip
