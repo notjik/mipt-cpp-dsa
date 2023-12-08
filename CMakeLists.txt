@@ -71,17 +71,20 @@ set(CMAKE_CXX_STANDARD 17)
 #add_executable(susu_mipt_cpp week-5--recursion-merge-and-mergesort/e--sequence.cpp)
 #add_executable(susu_mipt_cpp week-5--recursion-merge-and-mergesort/f--merge-sort.cpp)
 
+
 # [week-6]
 #add_executable(susu_mipt_cpp week-6--quicksort/a--quick-sort-and-quote-from-dead-souls.cpp)
 #add_executable(susu_mipt_cpp week-6--quicksort/b--applicants.cpp)
 #add_executable(susu_mipt_cpp week-6--quicksort/c--top-three.cpp)
 #add_executable(susu_mipt_cpp week-6--quicksort/d--chimneysweep.cpp)
 
+
 # [week-7]
 #add_executable(susu_mipt_cpp week-7--heapsort-and-countingsort/a--heap.cpp)
 #add_executable(susu_mipt_cpp week-7--heapsort-and-countingsort/b--heapsort.cpp)
 #add_executable(susu_mipt_cpp week-7--heapsort-and-countingsort/c--priority-queue.cpp)
 #add_executable(susu_mipt_cpp week-7--heapsort-and-countingsort/d--counting-sort.cpp)
+
 
 # [week-8]
 #add_executable(susu_mipt_cpp week-8--dynamic-programming/a--nth-number-fibonacci.cpp)
@@ -94,10 +97,12 @@ set(CMAKE_CXX_STANDARD 17)
 
 
 # [week-9]
+#add_executable(susu_mipt_cpp week-9--lists/main.cpp)
 #add_executable(susu_mipt_cpp week-9--lists/a--simple-stack.cpp)
 #add_executable(susu_mipt_cpp week-9--lists/b--simple-queue.cpp)
 #add_executable(susu_mipt_cpp week-9--lists/c--remove-brackets.cpp)
 #add_executable(susu_mipt_cpp week-9--lists/d--containers.cpp)
+
 
 # [week-10]
 #add_executable(susu_mipt_cpp week-10--bst/a--count-elements.cpp)
@@ -106,11 +111,17 @@ set(CMAKE_CXX_STANDARD 17)
 #add_executable(susu_mipt_cpp week-10--bst/d--output-branches.cpp)
 #add_executable(susu_mipt_cpp week-10--bst/e--frequency-of-occurrence-of-elements.cpp)
 
+
 # [week-11]
 #add_executable(susu_mipt_cpp week-11--cstring-and-treep/a--cstring/cstring.cpp
 #        week-11--cstring-and-treep/a--cstring/cstring.h)
 #add_executable(susu_mipt_cpp week-11--cstring-and-treep/b--traversing.cpp)
-add_executable(susu_mipt_cpp week-11--cstring-and-treep/c--cartesian-search-tree.cpp)
+#add_executable(susu_mipt_cpp week-11--cstring-and-treep/c--cartesian-search-tree.cpp)
+
 
 # [week-12]
-#add_executable(susu_mipt_cpp week-12--avl-tree/main.cpp)
+#add_executable(susu_mipt_cpp week-12--avl-tree/a--count-elements.cpp)
+#add_executable(susu_mipt_cpp week-12--avl-tree/b--traversing.cpp)
+#add_executable(susu_mipt_cpp week-12--avl-tree/c--balance.cpp)
+#add_executable(susu_mipt_cpp week-12--avl-tree/d--output-branches.cpp)
+add_executable(susu_mipt_cpp week-12--avl-tree/e--frequency-of-occurrence-of-elements.cpp)

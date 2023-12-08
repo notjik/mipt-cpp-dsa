@@ -8,6 +8,16 @@ struct Node {
   Node* parent = nullptr;
 };
 
+Node* Search(Node* root, int key) {
+  if (root == nullptr || key == root->val) {
+    return root;
+  }
+  if (key > root->val) {
+    return Search(root->right, key);
+  }
+  return Search(root->left, key);
+}
+
 Node* FindBackend(Node* root, int key) {
   if (root == nullptr || key == root->val) {
     return root;

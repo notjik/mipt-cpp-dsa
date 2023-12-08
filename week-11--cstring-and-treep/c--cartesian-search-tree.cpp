@@ -189,20 +189,3 @@ int main() {
   treap.Delete(root);
   return 0;
 }
-/*
-30
-push 1
-push 2
-push 3
-push 4
-push 5
-push 4
-find 4
-pop 4
-find 4
-push -4
-push 7
-get_min
-get_max
- *
- */

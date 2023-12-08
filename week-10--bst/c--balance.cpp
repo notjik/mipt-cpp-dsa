@@ -160,7 +160,7 @@ int Height(Node* root) {
 void BFactor(Node* root, bool& result) {
   if (root != nullptr) {
     BFactor(root->left, result);
-    if (abs(Height(root->left) - Height(root->right)) > 1) {
+    if (abs(Height(root->left) - Height(root->right)) > 2) {
       result = false;
       return;
     }
