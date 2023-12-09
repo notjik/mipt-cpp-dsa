@@ -124,4 +124,9 @@ set(CMAKE_CXX_STANDARD 17)
 #add_executable(susu_mipt_cpp week-12--avl-tree/b--traversing.cpp)
 #add_executable(susu_mipt_cpp week-12--avl-tree/c--balance.cpp)
 #add_executable(susu_mipt_cpp week-12--avl-tree/d--output-branches.cpp)
-add_executable(susu_mipt_cpp week-12--avl-tree/e--frequency-of-occurrence-of-elements.cpp)
+#add_executable(susu_mipt_cpp week-12--avl-tree/e--frequency-of-occurrence-of-elements.cpp)
+
+# [week-13]
+#add_executable(susu_mipt_cpp week-13--gcs-lis/a--harry-potter-and-the-gcs.cpp)
+#add_executable(susu_mipt_cpp week-13--gcs-lis/b--harry-potter-and-the-lis.cpp)
+add_executable(susu_mipt_cpp week-13--gcs-lis/c--harry-potter-and-the-fast-lis.cpp)
