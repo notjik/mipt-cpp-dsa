@@ -129,4 +129,7 @@ set(CMAKE_CXX_STANDARD 17)
 # [week-13]
 #add_executable(susu_mipt_cpp week-13--gcs-lis/a--harry-potter-and-the-gcs.cpp)
 #add_executable(susu_mipt_cpp week-13--gcs-lis/b--harry-potter-and-the-lis.cpp)
-add_executable(susu_mipt_cpp week-13--gcs-lis/c--harry-potter-and-the-fast-lis.cpp)
+#add_executable(susu_mipt_cpp week-13--gcs-lis/c--harry-potter-and-the-fast-lis.cpp)
+
+# [week-14]
+add_executable(susu_mipt_cpp week-14--rmq-lca/b--bite-me-bee.cpp)
