@@ -5,7 +5,7 @@
 int main() {
   int n = 0;
   int q = 0;
-  int len = 0;
+  int len;
   std::cin >> n;
   len = std::log2(n) + 1;
   int** st = new int*[len];
@@ -27,7 +27,6 @@ int main() {
     std::cout << '\n';
   }
   std::cin >> q;
-  int L,R;
   for (int i = 0; i < q; i++) {
     int l, r;
     std::cin >> l >> r;
