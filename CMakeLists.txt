@@ -43,7 +43,7 @@ set(CMAKE_CXX_STANDARD 17)
 #add_executable(susu_mipt_cpp semester-1/week-03--arrays-pointers-binsearch-gcd/e--sapper.cpp)
 #add_executable(susu_mipt_cpp semester-1/week-03--arrays-pointers-binsearch-gcd/f--spiral.cpp)
 #add_executable(susu_mipt_cpp semester-1/week-03--arrays-pointers-binsearch-gcd/g--binary-search.cpp)
-#add_executable(susu_mipt_cpp semester-1/week-03--arrays-pointers-binsearch-gcd/h--gcd-and-lcm.cpp)
+add_executable(susu_mipt_cpp semester-1/week-03--arrays-pointers-binsearch-gcd/h--gcd-and-lcm.cpp)
 
 
 # [week-4]
@@ -139,4 +139,4 @@ set(CMAKE_CXX_STANDARD 17)
 #add_executable(susu_mipt_cpp semester-1/week-14--rmq-lca/b--bite-me-bee.cpp)
 
 # [additional]
-add_executable(susu_mipt_cpp semester-1/additional-tasks/a--rmq.cpp)
+#add_executable(susu_mipt_cpp semester-1/additional-tasks/a--rmq.cpp)

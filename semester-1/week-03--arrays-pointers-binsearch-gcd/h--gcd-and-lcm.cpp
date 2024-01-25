@@ -18,7 +18,7 @@
 #include <iostream>
 #include <cstdint>
 
-int GCD(int64_t a, int64_t b) {
+uint64_t GCD(uint64_t a, uint64_t b) {
   while (a * b != 0) {
     if (a > b) {
       a %= b;

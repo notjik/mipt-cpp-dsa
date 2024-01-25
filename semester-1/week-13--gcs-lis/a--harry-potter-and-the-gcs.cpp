@@ -51,7 +51,7 @@ int main() {
   for (int i = 0; i < m; i++) {
     std::cin >> second[i];
   }
-  auto dp = new int*[n + 1];
+  auto dp = new int* [n + 1];
   for (int i = 0; i < n + 1; i++) {
     dp[i] = new int[m + 1]{};
   }
