@@ -3,6 +3,7 @@ project(susu_mipt_cpp)
 
 set(CMAKE_CXX_STANDARD 17)
 
+# [semester-1]
 # [week-1]
 #add_executable(susu_mipt_cpp semester-1/week-01--introduction/a--hello-world.cpp)
 #add_executable(susu_mipt_cpp semester-1/week-01--introduction/b--hypotenuse.cpp)
@@ -140,3 +141,17 @@ set(CMAKE_CXX_STANDARD 17)
 
 # [additional]
 #add_executable(susu_mipt_cpp semester-1/additional-tasks/a--rmq.cpp)
+
+
+# [semester-2]
+# [week-1]
+add_executable(susu_mipt_cpp semester-2/week-1/a.cpp)
+#add_executable(susu_mipt_cpp semester-2/week-1/b.cpp)
+#add_executable(susu_mipt_cpp semester-2/week-1/c.cpp)
+
+# [week-2]
+#add_executable(susu_mipt_cpp semester-2/week-2/vector.cpp)
+#add_executable(susu_mipt_cpp semester-2/week-2/a.cpp)
+#add_executable(susu_mipt_cpp semester-2/week-2/b.cpp)
+#add_executable(susu_mipt_cpp semester-2/week-2/c.cpp)
+#add_executable(susu_mipt_cpp semester-2/week-2/d.cpp)
