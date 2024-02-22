@@ -145,7 +145,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 # [semester-2]
 # [week-1]
-add_executable(susu_mipt_cpp semester-2/week-1/a.cpp)
+#add_executable(susu_mipt_cpp semester-2/week-1/a.cpp)
 #add_executable(susu_mipt_cpp semester-2/week-1/b.cpp)
 #add_executable(susu_mipt_cpp semester-2/week-1/c.cpp)
 
@@ -155,3 +155,6 @@ add_executable(susu_mipt_cpp semester-2/week-1/a.cpp)
 #add_executable(susu_mipt_cpp semester-2/week-2/b.cpp)
 #add_executable(susu_mipt_cpp semester-2/week-2/c.cpp)
 #add_executable(susu_mipt_cpp semester-2/week-2/d.cpp)
+
+# [week-3]
+add_executable(susu_mipt_cpp semester-2/week-3/main.cpp)
