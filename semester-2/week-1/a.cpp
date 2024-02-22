@@ -1,24 +1,32 @@
 #include <iostream>
 #include <cstdint>
 #include <string>
+#include <utility>
 
 class HashTable {
  private:
-  std::string _table[static_cast<uint64_t>(10e8)];
+  std::string* _table;
+
  public:
+  explicit HashTable(size_t size) {
+    _table = new std::string[size];
+  }
+  ~HashTable() {
+    delete[] _table;
+  }
   void Add(uint64_t number, std::string name) {
     _table[number] = std::move(name);
   }
   void Del(uint64_t number) {
-    _table[number] = "";
+    _table[number].clear();
   };
   void Find(uint64_t number) {
-  std::cout << (_table[number].empty() ? "not found" : _table[number]) << '\n';
+    std::cout << (_table[number].empty() ? "not found" : _table[number]) << '\n';
   }
 };
 
 int main() {
-  HashTable hash_table;
+  HashTable hash_table(static_cast<size_t>(1e8));
   int n;
   std::cin >> n;
   for (int i = 0; i < n; i++) {
