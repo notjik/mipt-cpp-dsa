@@ -3,30 +3,42 @@
 #include <string>
 #include <utility>
 
+struct Node {
+  std::string elem;
+};
+
 class HashTable {
  private:
-  std::string* _table;
+  Node **_table;
+  size_t _size;
 
  public:
   explicit HashTable(size_t size) {
-    _table = new std::string[size];
+    _table = new Node *[size]{nullptr};
+    _size = size;
   }
   ~HashTable() {
+    for (size_t i = 0; i < _size; i++) {
+      if (_table[i]) {
+        delete _table[i];
+      }
+    }
     delete[] _table;
   }
   void Add(uint64_t number, std::string name) {
-    _table[number] = std::move(name);
+    _table[number] = new Node();
+    _table[number]->elem = std::move(name);
   }
   void Del(uint64_t number) {
-    _table[number].clear();
+    _table[number] = nullptr;
   };
   void Find(uint64_t number) {
-    std::cout << (_table[number].empty() ? "not found" : _table[number]) << '\n';
+    std::cout << (!_table[number] ? "not found" : _table[number]->elem) << '\n';
   }
 };
 
 int main() {
-  HashTable hash_table(static_cast<size_t>(1e8));
+  HashTable hash_table(static_cast<size_t>(1e7));
   int n;
   std::cin >> n;
   for (int i = 0; i < n; i++) {
