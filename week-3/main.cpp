@@ -28,7 +28,7 @@ class Graph {
       colors(std::vector<Colors>(vertices.size(), White)),
       parents(std::vector<int>(vertices.size() - 1, -1)) {}
 
-  void DFS (int index) {
+  void IsBipartite(int index) {
     colors[index] = Grey;
     // std::cout << index << " ";
     for (auto& i : vertices[index]) {
