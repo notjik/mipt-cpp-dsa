@@ -16,15 +16,14 @@ set(CMAKE_CXX_STANDARD 17)
 #add_executable(susu_mipt_cpp week-2/d.cpp)
 
 # [week-3]
-add_executable(susu_mipt_cpp week-3/a.cpp)
+#add_executable(susu_mipt_cpp week-3/a.cpp)
 #add_executable(susu_mipt_cpp week-3/b.cpp)
 #add_executable(susu_mipt_cpp week-3/c.cpp)
 #add_executable(susu_mipt_cpp week-3/d.cpp)
 
 # [week-4]
 #add_executable(susu_mipt_cpp week-4/main.cpp)
-#add_executable(susu_mipt_cpp week-4/b.cpp)
-#add_executable(susu_mipt_cpp week-5/a.cpp)
+add_executable(susu_mipt_cpp week-4/b.cpp)
 
 # [week-5]
 #add_executable(susu_mipt_cpp week-5/a.cpp)

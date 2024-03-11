@@ -6,9 +6,10 @@ enum Colors { White, Grey, Black };
 class Vertex {
  public:
   Vertex() = default;
-  explicit Vertex(int idx_) : idx(idx_) {}
-  Colors color = White;
-  int idx;
+  explicit Vertex(int idx) : idx_(idx) {
+  }
+  Colors color_ = White;
+  int idx_;
 };
 
 class Graph {
@@ -18,45 +19,44 @@ class Graph {
   std::vector<int> component_;
   std::vector<int> top_sorted_;
 
-  void TopSortDFS(Vertex& vertex);
+  void TopSortDFS(Vertex &vertex);
   Graph Reverse();
-  void DFS(Vertex& vertex, int k);
+  void DFS(Vertex &vertex, int k);
   void ClearVertices();
 
  public:
   void TopSort();
   void FindComponent();
 
-  friend std::istream& operator>>(std::istream& is, Graph& graph);
-
+  friend std::istream &operator>>(std::istream &is, Graph &graph);
 };
 
-void Graph::DFS(Vertex& vertex, int k) {
-  vertex.color = Grey;
-  component_[vertex.idx] = k;
+void Graph::DFS(Vertex &vertex, int k) {
+  vertex.color_ = Grey;
+  component_[vertex.idx_] = k;
 
-  for (auto& i : neighbours_[vertex.idx]) {
-    if (vertices_[i].color == White) {
+  for (auto &i : neighbours_[vertex.idx_]) {
+    if (vertices_[i].color_ == White) {
       DFS(vertices_[i], k);
     }
   }
-  vertex.color = Black;
+  vertex.color_ = Black;
 }
 
-void Graph::TopSortDFS(Vertex& vertex) {
-  vertex.color = Grey;
-  for (auto& i : neighbours_[vertex.idx]) {
-    if (vertices_[i].color == White) {
+void Graph::TopSortDFS(Vertex &vertex) {
+  vertex.color_ = Grey;
+  for (auto &i : neighbours_[vertex.idx_]) {
+    if (vertices_[i].color_ == White) {
       TopSortDFS(vertices_[i]);
     }
   }
-  top_sorted_.push_back(vertex.idx);
-  vertex.color = Black;
+  top_sorted_.push_back(vertex.idx_);
+  vertex.color_ = Black;
 }
 
 void Graph::TopSort() {
   for (size_t i = 0; i < neighbours_.size(); i++) {
-    if (vertices_[i].color == White) {
+    if (vertices_[i].color_ == White) {
       TopSortDFS(vertices_[i]);
     }
   }
@@ -64,11 +64,10 @@ void Graph::TopSort() {
 }
 
 void Graph::ClearVertices() {
-  for (auto& i : vertices_) {
-    i.color = White;
+  for (auto &i : vertices_) {
+    i.color_ = White;
   }
 }
-
 
 Graph Graph::Reverse() {
   Graph copy;
@@ -76,12 +75,11 @@ Graph Graph::Reverse() {
   copy.vertices_.resize(vertices_.size());
   copy.component_.resize(vertices_.size());
 
+  for (int i = 0; i < static_cast<int>(vertices_.size()); i++) {
 
-  for(int i = 0; i < vertices_.size(); i++){
+    copy.vertices_[i].idx_ = i;
 
-    copy.vertices_[i].idx = i;
-
-    for(int j = 0; j < neighbours_[i].size(); j++){
+    for (int j = 0; j < static_cast<int>(neighbours_[i].size()); j++) {
       copy.neighbours_[neighbours_[i][j]].push_back(i);
     }
   }
@@ -92,34 +90,35 @@ Graph Graph::Reverse() {
 void Graph::FindComponent() {
   TopSort();
   int k = 0;
-  Graph ReverseGraph = Reverse();
+  Graph reverse_graph = Reverse();
 
-  for(int i = top_sorted_.size() - 1; i >= 0; i--){
-    if(ReverseGraph.vertices_[top_sorted_[i]].color == White){
-      ReverseGraph.DFS(ReverseGraph.vertices_[top_sorted_[i]], ++k);
+  for (int i = static_cast<int>(top_sorted_.size()) - 1; i >= 0; i--) {
+    if (reverse_graph.vertices_[top_sorted_[i]].color_ == White) {
+      reverse_graph.DFS(reverse_graph.vertices_[top_sorted_[i]], ++k);
     }
   }
 
   std::cout << k << '\n';
 
-  for(auto i : ReverseGraph.component_) {
+  for (auto i : reverse_graph.component_) {
     std::cout << i << " ";
   }
 }
 
-
-std::istream& operator>>(std::istream& is, Graph& graph){
-  int n, m;
+std::istream &operator>>(std::istream &is, Graph &graph) {
+  int n = 0;
+  int m = 0;
   is >> n >> m;
   graph.neighbours_.resize(n);
   graph.vertices_.resize(n);
 
-  for(int i = 0; i < n; i++) {
-    graph.vertices_[i].idx = i;
+  for (int i = 0; i < n; i++) {
+    graph.vertices_[i].idx_ = i;
   }
 
-  for(int i = 0; i < m; i++){
-    int from, to;
+  for (int i = 0; i < m; i++) {
+    int from = 0;
+    int to = 0;
     is >> from >> to;
     graph.neighbours_[--from].push_back(--to);
   }

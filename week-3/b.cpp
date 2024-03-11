@@ -23,6 +23,17 @@ class Graph {
     }
   }
 
+  void DFS(int index) {
+    colors_[index] = Grey;
+    // std::cout << index << " ";
+    for (auto& i : vertices_[index]) {
+      if (colors_[i] == White) {
+        DFS(i);
+      }
+    }
+    colors_[index] = Black;
+  }
+
   bool IsCycleExist(int index, int& start, int& end) {
     colors_[index] = Grey;
     for (auto& i : vertices_[index]) {

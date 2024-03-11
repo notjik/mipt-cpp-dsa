@@ -1,8 +1,7 @@
-// Not end
 #include <iostream>
 #include <vector>
 
-enum Colors { White, Red, Blue };
+enum Colors { White, Grey, Blue, Red };
 
 class Graph {
  private:
@@ -22,20 +21,30 @@ class Graph {
     }
   }
 
-  bool IsBipartite(int index, int &count) {
-    colors_[index] = (count % 2 ? Red : Blue);
+  bool IsBipartite(int index, int count) {
+    bool result = true;
+    colors_[index] = Grey;
     count++;
     for (auto &i : vertices_[index]) {
-      if (colors_[i] == White || colors_[i] == (count % 2 ? Red : Blue)) {
-        colors_[i] = (count % 2 ? Red : Blue);
-      } else {
+      if (colors_[i] == White) {
+        result = result && IsBipartite(i, count);
+      } else if (colors_[i] == (!(count % 2) ? Blue : Red)) {
         return false;
       }
     }
-    for (auto &i : vertices_[index]) {
-      return IsBipartite(i, count);
+    count--;
+    colors_[index] = (count % 2 ? Blue : Red);
+    return result;
+  }
+
+  bool IsBipartiteAll() {
+    bool result = true;
+    for (int i = 0; i < static_cast<int>(vertices_.size()); i++) {
+      if (colors_[i] == White) {
+        result = result && IsBipartite(i, 0);
+      }
     }
-    return true;
+    return result;
   }
 };
 
@@ -47,7 +56,6 @@ int main() {
   int m = 0;
   std::cin >> n >> m;
   Graph graph(n, m);
-  int count = 0;
-  std::cout << (graph.IsBipartite(0, count) ? "YES" : "NO");
+  std::cout << (graph.IsBipartiteAll() ? "YES" : "NO");
   return 0;
 }
