@@ -23,8 +23,11 @@ set(CMAKE_CXX_STANDARD 17)
 
 # [week-4]
 #add_executable(susu_mipt_cpp week-4/main.cpp)
-add_executable(susu_mipt_cpp week-4/b.cpp)
+#add_executable(susu_mipt_cpp week-4/a.cpp)
+#add_executable(susu_mipt_cpp week-4/b.cpp)
 
 # [week-5]
 #add_executable(susu_mipt_cpp week-5/a.cpp)
 #add_executable(susu_mipt_cpp week-5/c.cpp)
+
+add_executable(susu_mipt_cpp week-7/c.cpp)
