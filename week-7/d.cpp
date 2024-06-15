@@ -1,90 +1,110 @@
+#include <climits>
 #include <iostream>
+#include <map>
+#include <queue>
+#include <set>
 #include <vector>
 
-class Edge {
- public:
-  int begin;
-  int end;
-  int weight;
+// Перечисление для цветов вершин, используемое в алгоритме DFS для отслеживания состояния вершины
+enum Color { White, Grey, Black };
 
-  Edge(int src, int dest, int w) : begin(src), end(dest), weight(w) {
-  }
-
-  bool operator<(const Edge& other) const {
-    return weight < other.weight;
-  }
+// Структура для представления вершины графа
+struct Vertex {
+    int index = 0;                // Индекс вершины
+    int time_in = 0;              // Время входа в вершину (для алгоритма DFS)
+    int time_up = 0;              // Минимальное время входа, достижимое из вершины (для алгоритма DFS)
+    std::vector<int> edges;       // Список смежных вершин
+    Color color = White;          // Цвет вершины (White, Grey, Black)
 };
 
-class CDU {
- public:
-  int Kraskal();
-  friend std::istream& operator>>(std::istream& is, CDU& cdu);
+// Класс для представления графа
+class Graph {
+private:
+    std::vector<Vertex> vertices_; // Список всех вершин в графе
+    std::set<int> points_set_;     // Набор точек сочленения (арт-точек)
+    int timer_ = 0;                // Таймер для отслеживания времени входа в вершину в алгоритме DFS
 
- private:
-  std::vector<int> parent_;
-  std::vector<Edge> edges_;
-  std::vector<int> rank_;
+    // Вспомогательный метод для выполнения алгоритма DFS
+    void DFS(Vertex& curr, bool is_root);
 
-  int FindSet(int idx);
-  void Union(int first, int second);
+public:
+    // Перегрузка оператора ввода для чтения графа
+    friend std::istream& operator>>(std::istream& is, Graph& graph);
+
+    // Метод для поиска и вывода точек сочленения
+    void FindPoints();
 };
 
-std::istream& operator>>(std::istream& is, CDU& cdu) {
-  int n = 0;
-  int m = 0;
-  is >> n >> m;
-  cdu.parent_.resize(n, -1);
-  cdu.rank_.resize(n, 1);
-  for (int i = 0; i < m; i++) {
+// Перегрузка оператора ввода для чтения графа из входного потока
+std::istream& operator>>(std::istream& is, Graph& graph) {
+    int n = 0; // Количество вершин
+    int m = 0; // Количество рёбер
+    is >> n >> m;
+    graph.vertices_.resize(n);
     int begin = 0;
     int end = 0;
-    int weight = 0;
-    is >> begin >> end >> weight;
-    begin--;
-    end--;
-    Edge edge = Edge(begin, end, weight);
-    cdu.edges_.push_back(edge);
-  }
-  return is;
-}
+    for (int i = 0; i < m; i++) {
+        is >> begin >> end;
+        --begin; // Переход к нумерации вершин с нуля
+        --end;   // Переход к нумерации вершин с нуля
 
-int CDU::FindSet(int idx) {
-  if (parent_[idx] == -1) {
-    return idx;
-  }
-  return parent_[idx] = FindSet(parent_[idx]);
-}
-
-void CDU::Union(int first, int second) {
-  int leader_first = FindSet(first);
-  int leader_second = FindSet(second);
-  if (rank_[leader_first] > rank_[leader_second]) {
-    parent_[leader_second] = leader_first;
-  } else if (rank_[leader_first] < rank_[leader_second]) {
-    parent_[leader_first] = leader_second;
-  } else {
-    parent_[leader_second] = leader_first;
-    rank_[leader_first]++;
-  }
-}
-
-int CDU::Kraskal() {
-  int weight = 0;
-  for (auto& edge : edges_) {
-    if (FindSet(edge.begin) != FindSet(edge.end)) {
-      Union(edge.begin, edge.end);
-      weight += edge.weight;
+        graph.vertices_[begin].index = begin;
+        graph.vertices_[end].index = end;
+        graph.vertices_[begin].edges.push_back(end);
+        graph.vertices_[end].edges.push_back(begin);
     }
-  }
-  return weight;
+    return is;
 }
 
+// Вспомогательный метод для выполнения алгоритма DFS
+void Graph::DFS(Vertex& curr, bool is_root) {
+    curr.color = Grey;
+    curr.time_in = ++timer_;
+    curr.time_up = timer_;
+    int children_amount = 0; // Количество детей текущей вершины в дереве DFS
+    for (int i : curr.edges) {
+        if (vertices_[i].color == Grey) {
+            // Обновление time_up для текущей вершины
+            curr.time_up = std::min(curr.time_up, vertices_[i].time_in);
+        }
+        if (vertices_[i].color == White) {
+            ++children_amount;
+            DFS(vertices_[i], false);
+            curr.time_up = std::min(curr.time_up, vertices_[i].time_up);
+
+            // Проверка условия для точки сочленения
+            if (!is_root && curr.time_in <= vertices_[i].time_up) {
+                points_set_.insert(curr.index);
+            }
+        }
+    }
+
+    // Проверка корневой вершины на наличие более одного ребёнка
+    if (is_root && children_amount > 1) {
+        points_set_.insert(curr.index);
+    }
+    curr.color = Black;
+}
+
+// Метод для поиска и вывода точек сочленения
+void Graph::FindPoints() {
+    for (auto& vertex : vertices_) {
+        if (vertex.color == White) {
+            DFS(vertex, true);
+        }
+    }
+    // Вывод количества точек сочленения
+    std::cout << points_set_.size() << '\n';
+    // Вывод индексов точек сочленения
+    for (int point : points_set_) {
+        std::cout << point + 1 << '\n'; // Переход к нумерации вершин с единицы для вывода
+    }
+}
+
+// Главная функция
 int main() {
-  std::cin.tie(nullptr);
-  std::cout.tie(nullptr);
-  std::istream::sync_with_stdio(false);
-  CDU cdu;
-  std::cin >> cdu;
-  std::cout << cdu.Kraskal();
-  return 0;
+    Graph graph;
+    std::cin >> graph; // Чтение графа из стандартного ввода
+    graph.FindPoints(); // Поиск и вывод точек сочленения
+    return 0;
 }
