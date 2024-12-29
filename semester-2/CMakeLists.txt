@@ -5,45 +5,45 @@ set(CMAKE_CXX_STANDARD 17)
 
 
 # [week-1]
-#add_executable(susu_mipt_cpp week-1/a.cpp)
-#add_executable(susu_mipt_cpp week-1/b.cpp)
-#add_executable(susu_mipt_cpp week-1/c.cpp)
+#add_executable(susu_mipt_cpp week-01/a.cpp)
+#add_executable(susu_mipt_cpp week-01/b.cpp)
+#add_executable(susu_mipt_cpp week-01/c.cpp)
 
 # [week-2]
-#add_executable(susu_mipt_cpp week-2/a.cpp)
-#add_executable(susu_mipt_cpp week-2/b.cpp)
-#add_executable(susu_mipt_cpp week-2/c.cpp)
-#add_executable(susu_mipt_cpp week-2/d.cpp)
+#add_executable(susu_mipt_cpp week-02/a.cpp)
+#add_executable(susu_mipt_cpp week-02/b.cpp)
+#add_executable(susu_mipt_cpp week-02/c.cpp)
+#add_executable(susu_mipt_cpp week-02/d.cpp)
 
 # [week-3]
-#add_executable(susu_mipt_cpp week-3/a.cpp)
-#add_executable(susu_mipt_cpp week-3/b.cpp)
-#add_executable(susu_mipt_cpp week-3/c.cpp)
-#add_executable(susu_mipt_cpp week-3/d.cpp)
+#add_executable(susu_mipt_cpp week-03/a.cpp)
+#add_executable(susu_mipt_cpp week-03/b.cpp)
+#add_executable(susu_mipt_cpp week-03/c.cpp)
+#add_executable(susu_mipt_cpp week-03/d.cpp)
 
 # [week-4]
-#add_executable(susu_mipt_cpp week-4/main.cpp)
-#add_executable(susu_mipt_cpp week-4/a.cpp)
-#add_executable(susu_mipt_cpp week-4/b.cpp)
+#add_executable(susu_mipt_cpp week-04/main.cpp)
+#add_executable(susu_mipt_cpp week-04/a.cpp)
+#add_executable(susu_mipt_cpp week-04/b.cpp)
 
 # [week-5]
-#add_executable(susu_mipt_cpp week-5/a.cpp)
-#add_executable(susu_mipt_cpp week-5/b.cpp)
-#add_executable(susu_mipt_cpp week-5/c.cpp)
+#add_executable(susu_mipt_cpp week-05/a.cpp)
+#add_executable(susu_mipt_cpp week-05/b.cpp)
+#add_executable(susu_mipt_cpp week-05/c.cpp)
 
 # [week-7]
-#add_executable(susu_mipt_cpp week-7/a.cpp)
-#add_executable(susu_mipt_cpp week-7/b.cpp)
-#add_executable(susu_mipt_cpp week-7/c.cpp)
-#add_executable(susu_mipt_cpp week-7/d.cpp)
+#add_executable(susu_mipt_cpp week-07/a.cpp)
+#add_executable(susu_mipt_cpp week-07/b.cpp)
+#add_executable(susu_mipt_cpp week-07/c.cpp)
+#add_executable(susu_mipt_cpp week-07/d.cpp)
 
 # [week-8]
-#add_executable(susu_mipt_cpp week-8/c.cpp)
-#add_executable(susu_mipt_cpp week-8/d.cpp)
-#add_executable(susu_mipt_cpp week-8/geometry.cpp)
+#add_executable(susu_mipt_cpp week-08/c.cpp)
+#add_executable(susu_mipt_cpp week-08/d.cpp)
+#add_executable(susu_mipt_cpp week-08/geometry.cpp)
 
 # [week-9]
-#add_executable(susu_mipt_cpp week-9/a.cpp)
+#add_executable(susu_mipt_cpp week-09/a.cpp)
 
 # [week-10]
 
