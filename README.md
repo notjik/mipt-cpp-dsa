@@ -1,4 +1,4 @@
-###### susu-mipt-cpp
+###### mipt-cpp-dsa
 
 <details><summary> 
 <strong>English</strong>
